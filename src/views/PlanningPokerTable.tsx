@@ -1,6 +1,7 @@
 import { Avatar, AvatarBadge, Box, Button, Container, HStack, Tooltip } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import CardList from "../components/CardList/CardList";
+import PlayersSeat from "../components/PlayersSeat/PlayersSeat";
 import PlayingCard from "../components/PlayingCard/PlayingCard";
 import { useChannel } from "../hooks/useChannel";
 import { useMockedChannel } from "../hooks/useMockedChannel";
@@ -27,17 +28,7 @@ const PlanningPokerTable = ({ user }: PlanningPokerTableProps): JSX.Element => {
 
     return <Container>
         <Box p={5}>
-            <HStack justify="center" spacing={5}>
-                {
-                    topTablePlayers.map(elem => (
-                        <Box key={elem.id} >
-                            <Tooltip label={elem.name}>
-                                <Avatar name={elem.name} bg={ elem.hasVoted ? "green.500" : "gray.300"} />
-                            </Tooltip>
-                        </Box>
-                    ))
-                }
-            </HStack>
+            <PlayersSeat players={topTablePlayers} />
         </Box>
         <Box display="flex" justifyContent="center" bg='purple.200' borderRadius='lg' p="10%">
             <Button colorScheme="purple" size="lg">
@@ -45,22 +36,10 @@ const PlanningPokerTable = ({ user }: PlanningPokerTableProps): JSX.Element => {
             </Button>
         </Box>
         <Box p={5}>
-            <HStack justify="center" spacing={5}>
-                {
-                    bottomTablePlayers.map(elem => (
-                        <Avatar name={elem.name} key={elem.id} />
-                    ))
-                }
-                {/* <Avatar name="Fabien Fernande Alves">
-                    <AvatarBadge boxSize='1.25em' bg='green.500' borderColor='green.50' />
-                </Avatar>
-                <Avatar name="Fabien Fernande Alves">
-                    <AvatarBadge boxSize='1.25em' borderColor='papayawhip' bg='tomato' />
-                </Avatar> */}
-            </HStack>
+            <PlayersSeat players={bottomTablePlayers} />
         </Box>
 
-        <CardList />
+        <CardList user={user}/>
     </Container>
 };
 
